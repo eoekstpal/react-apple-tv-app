@@ -14,15 +14,19 @@ const Row = ({title, id, fetchUrl}) => {
   useEffect(() => {
     fetchMovieData();
   }, [fetchMovieData])
-
-
-
+  console.log(document.getElementById(id))
   return (
     <div>
       <h1>{title}</h1>
       <div className='slider'>
         <div className='slider_arrow-left'>
-          <span className='arrow'>
+          <span className='arrow'
+            onClick={
+              () => {
+                document.getElementById(id).scrollLeft -= window.innerWidth -80;
+              }
+            }
+          >
             {"<"}
           </span>
         </div>
@@ -37,7 +41,13 @@ const Row = ({title, id, fetchUrl}) => {
           ))}
         </div>
         <div className='slider_arrow-right'>
-          <span className='arrow'>
+          <span className='arrow'
+            onClick={
+              () => {
+                document.getElementById(id).scrollLeft += window.innerWidth - 80;
+              }
+            }
+          >
             {">"}
           </span>
         </div>

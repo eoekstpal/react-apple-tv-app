@@ -85,6 +85,10 @@
     border-radius: 4px;
 }
 
+.row_posters::-webkit-scrollbar {
+    display: none;
+}
+
 .row_poster:hover{
     transform: scale(1.08);
 }
