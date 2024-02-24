@@ -1,4 +1,5 @@
 import { imageBasePath } from "../constant"
+import './MovieModal.css';
 
 const MovieModal = ({
     backdrop_path,
