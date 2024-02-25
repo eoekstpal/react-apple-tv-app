@@ -5,6 +5,7 @@ import LoginPage from './pages/LoginPage'
 import MainPage from './pages/MainPage'
 import DetailPage from './pages/DetailPage'
 import SearchPage from './pages/SearchPage'
+import { useRef } from 'react'
 
 
 const Layout = () => {
@@ -18,6 +19,9 @@ const Layout = () => {
 }
 
 function App() {
+
+  const ref = useRef('hi')
+
   return (
     <>
       <Routes>
