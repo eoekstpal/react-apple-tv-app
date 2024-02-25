@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import app from "../firebase";
 
 const Nav = () => {
 
@@ -8,6 +10,10 @@ const Nav = () => {
 
     const [searchValue, setSearchValue] = useState('');
     const navigate = useNavigate();
+    const { pathname } = useLocation();
+
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
 
     //scrollY값에 따른 색 변화
     const listener = () => {
@@ -30,6 +36,16 @@ const Nav = () => {
         navigate(`/search?q=${e.target.value}`);
     }
 
+    const handleAuth = () => {
+        signInWithPopup(auth, provider)
+        .then((result) => {
+            
+        })
+        .catch((error) => {
+            alert(error);
+        })
+    }
+
   return (
     <NavWrapper show={show}>
         <Logo>
@@ -40,15 +56,19 @@ const Nav = () => {
             />
         </Logo>
 
-        <Input
-            type="text"
-            className="nav_input"
-            value={searchValue}
-            onChange={handleChange}
-            placeholder="영화를 검색해주세요"
-        />
-
-        <Login>로그인</Login>
+        {pathname === "/" ? (
+            <Login
+                onClick={handleAuth}
+            >로그인</Login>
+        ) :
+            <Input
+                type="text"
+                className="nav_input"
+                value={searchValue}
+                onChange={handleChange}
+                placeholder="영화를 검색해주세요"
+            />
+        }
     </NavWrapper>
   )
 }
